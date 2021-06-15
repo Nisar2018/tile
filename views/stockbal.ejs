@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h2> <%= title %></h2>
+        <table class="table table-dark table-striped" >
+            <thead>
+                <tr>
+                   <th>id</th> 
+                   <th>Item  Code</th>
+                   <th>Stock Balance</th>
+                   </tr>
+            </thead>
+    
+  <%
+        if(itemsData.length!=0){
+        var i=1;
+        itemsData.forEach(function(result){
+        %>
+        <tr>
+            <td><%=i; %></td>
+            <td><%=result.itemcode %></td>
+            <td><%=result.StockBalance.toFixed(2) %></td>
+            </tr>
+        <%  i++; }) %>
+        <% } else{ %>
+            <tr>
+                <td colspan="7">No Data Found</td>
+            </tr>
+        <% } %>
+
+        </table>
+    </div>
+</body>
+</html>
