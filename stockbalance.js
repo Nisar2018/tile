@@ -15,42 +15,64 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended:false}));
 
 app.get('/', async(req,res)=>{
-
-
 const config = {
     user : 'admin',
     password :'A@Zmet@l!!123',
     server:'72.255.34.95',
     database : 'tile', 
     options:  {
-     //   trustedconnection: true ,
-    //    enableArithAbort: true ,
-        encrypt : false
+          encrypt : false
         }
-    
-}
+    }
 
   try {
       // make sure that any items are correctly URL encoded in the connection string
       let pool = await sql.connect(config);
      // console.log('db connected');
-      const result = await pool.request().query('select * from qstockbalancemobile');
+      const result = await pool.request().query("select * from qstockbalancemobile where itemcode like '%MUL%' ");
      // console.log('query executed');
      // console.log(result);
       res.render('stockbal',{
-      title: 'Using nodejs/express/mssql,Parts List', itemsData:result.recordset });
+      title: 'Items Balance Inquiry', itemsData:result.recordset });
       pool.close();
+      sql.close();
      // console.log('db connection closed');
     } catch (err) {
-       // console.log(err);
-    }
-     
-    
+       console.log(err);
+                    }
   }); 
   
-  app.listen(process.env.PORT||5000);
+  app.post('/partsearch', async(req,res)=>{
+    const config = {
+        user : 'admin',
+        password :'A@Zmet@l!!123',
+        server:'72.255.34.95',
+        database : 'tile', 
+        options:  {
+              encrypt : false
+            }
+        }
+        const  vpart = req.body.partno.toUpperCase();
+        const sqlquery = "select * from qstockbalancemobile where itemcode like '%"+vpart+"%'" ;
+      try {
+          // make sure that any items are correctly URL encoded in the connection string
+          let pool = await sql.connect(config);
+         // console.log('db connected');
+          const result = await pool.request().query(sqlquery);
+         // console.log('query executed');
+         // console.log(result);
+          res.render('stockbal',{
+          title: 'Items Balance Inquiry', itemsData:result.recordset });
+          pool.close();
+          sql.close();
+         // console.log('db connection closed');
+        } catch (err) {
+           console.log(err);
+                        }
+      });  
+ 
   // create web server
- // const  webserver = app.listen(process.env.PORT||5000, function(){
-    //  console.log('Node web server is running');
- // });
+  const  webserver = app.listen(process.env.PORT||5000, function(){
+    console.log('Node web server is running');
+  });
   
