@@ -18,7 +18,7 @@ app.get('/', async(req,res)=>{
 const config = {
     user : 'admin',
     password :'A@Zmet@l!!123',
-    server:'72.255.34.95',
+    server:'119.153.105.230',
     database : 'tile', 
     options:  {
           encrypt : false
@@ -46,7 +46,7 @@ const config = {
     const config = {
         user : 'admin',
         password :'A@Zmet@l!!123',
-        server:'72.255.34.95',
+        server:'119.153.105.230',
         database : 'tile', 
         options:  {
               encrypt : false
@@ -72,7 +72,7 @@ const config = {
       });  
  
   // create web server
-  const  webserver = app.listen(process.env.PORT||5000, function(){
+  const  webserver = app.listen(process.env.PORT||5005, function(){
     console.log('Node web server is running');
   });
   
