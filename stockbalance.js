@@ -18,19 +18,21 @@ app.get('/', async(req,res)=>{
 const config = {
     user : 'admin',
     password :'A@Zmet@l!!123',
-    server:'119.153.105.230',
+    server:'72.255.34.95',
     database : 'tile', 
     options:  {
           encrypt : false
         }
     }
-
+    
   try {
       // make sure that any items are correctly URL encoded in the connection string
       let pool = await sql.connect(config);
      // console.log('db connected');
       const result = await pool.request().query("select * from qstockbalancemobile where itemcode like '%MUL%' ");
-     // console.log('query executed');
+     //sql.query("INSERT INTO customers (name, address) VALUES ('alaah hukber', 'Highway 37')")
+     
+      // console.log('query executed');
      // console.log(result);
       res.render('stockbal',{
       title: 'Items Balance Inquiry', itemsData:result.recordset });
@@ -46,7 +48,7 @@ const config = {
     const config = {
         user : 'admin',
         password :'A@Zmet@l!!123',
-        server:'119.153.105.230',
+        server:'72.255.34.95',
         database : 'tile', 
         options:  {
               encrypt : false
@@ -69,8 +71,7 @@ const config = {
         } catch (err) {
            console.log(err);
                         }
-      });  
- 
+      });   
   // create web server
   const  webserver = app.listen(process.env.PORT||5005, function(){
     console.log('Node web server is running');
