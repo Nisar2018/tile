@@ -48,7 +48,7 @@ const config = {
     const config = {
         user : 'admin',
         password :'A@Zmet@l!!123',
-        server:'72.255.34.95',
+        server:'119.153.105.230',
         database : 'tile', 
         options:  {
               encrypt : false
